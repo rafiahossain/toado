@@ -5,13 +5,13 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 # create the app
-app = Flask(__name__)
-Scss(app)
+toado = Flask(__name__)
+Scss(toado)
 
-# configure the SQLite database, relative to the app instance folder
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
-app.config["SQLALCHEMY_TRACK_MODIFICATION"] = False
-db = SQLAlchemy(app)
+# configure the SQLite database, relative to the toado instance folder
+toado.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///toadoDB.db"
+toado.config["SQLALCHEMY_TRACK_MODIFICATION"] = False
+db = SQLAlchemy(toado)
 
 # ~ kind of a Data class ~ Row of data
 class MyTask(db.Model):
@@ -23,11 +23,11 @@ class MyTask(db.Model):
     def __repr__(self) -> str:
         return f"Task {self.id}"
 
-with app.app_context():
+with toado.app_context():
     db.create_all()
 
 # Home Page index, and a route to it
-@app.route("/",methods=["POST","GET"])
+@toado.route("/",methods=["POST","GET"])
 def index():
     # Add a task
     if request.method == "POST":
@@ -46,7 +46,7 @@ def index():
         return render_template("index.html", tasks=tasks)
 
 # DELETE an item
-@app.route("/delete/<int:id>")
+@toado.route("/delete/<int:id>")
 def delete(id:int):
     delete_task = MyTask.query.get_or_404(id)
     try:
@@ -60,7 +60,7 @@ def delete(id:int):
     # so 404 should not occur
 
 # Edit an item
-@app.route("/edit/<int:id>", methods=["GET","POST"])
+@toado.route("/edit/<int:id>", methods=["GET","POST"])
 def edit(id:int):
     task = MyTask.query.get_or_404(id)
     if request.method == "POST":
@@ -76,5 +76,5 @@ def edit(id:int):
 # RUNNER and DEBUGGER
 # Keep Flask updating itself
 if __name__ == "__main__":      
-    app.run(debug=True)
+    toado.run(debug=True)
 
