@@ -18,5 +18,10 @@ Toado is a minimal Flask web app for tracking daily tasks. It lets you add, edit
 - Flask
 - HTML5, SCSS/CSS
 - Jinja2 Templating
-- SQLite
+- SQLite using SQL Alchemy tool
+
+## Setup
+
+1. Virtual Environment
+2. Install dependencies in virtual environment from requirements.txt
 
