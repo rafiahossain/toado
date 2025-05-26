@@ -3,7 +3,7 @@ toadoVENV/
 
 # Ignore database files
 instance/
-database.db
+toadoDB.db
 
 # Ignore environment variables
 .env
